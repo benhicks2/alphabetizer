@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+
+    <title>Alphabetizer</title>
+    <link rel="shortcut icon" href="logo.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="javascript.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="theme.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <div class="helpButton"><i class="material-icons">help</i></div>
+    <div class="overlay"></div>
+    <div class="helpDiv">
+      <div class="close"><i class="material-icons">close</i></div>
+      <h3>How to use the Alphabetizer</h3>
+      <ul>
+        <li>To only submit one word at a time, type in your word and press ENTER or SUBMIT.</li>
+        <li>If you want to submit multiple words at a time, type each one in with a comma then a space in between, then submit it. </li>
+        <li>To remove all of the words, press the RESET button.</li>
+      </ul>
+    </div>
+
+    <header>
+      <h1>Alphabetizer</h1>
+
+        <input class="input" type="text" id="orderInput" placeholder="Add new words"></input>
+        <br>
+        <input class="reset" type="reset" onClick="resetFunction();"></input>
+        <input class ="submit" type="submit" onClick="orderFunction();"></input>
+    </header>
+
+    <div class="listDiv">
+      <ul id="list">
+
+      </ul>
+    </div>
+
+  </body>
+
+</html>
