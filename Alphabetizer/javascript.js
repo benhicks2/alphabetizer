@@ -1,4 +1,4 @@
-var list = [];
+let list = [];
 
 function resetFunction() {
   list = [];
@@ -6,64 +6,33 @@ function resetFunction() {
 }
 
 function orderFunction() {
-  var input = document.getElementById('orderInput').value;
-  var inputNew = input.trim();
-  var inputLower = inputNew.toLowerCase();
-  var listLength = $("#list li").length;
-  var newList = [inputLower];
-  var newListSorted
-  var newListOriginal;
-  var location;
-  var newLocation;
-  var sortedList;
-  var originalLocation;
+  let $list = $('#list');
+  let input = document.getElementById('orderInput').value;
+  let listLength = $("#list li").length;
+  let newList = [input];
 
   $('#orderInput').val('');
 
-  if (inputLower == "") {
-    return;
+  if (input.indexOf(',') > -1) {
+     newList = input.split(',');
   }
-
-  if (inputNew.indexOf(', ') > -1) {
-    newListOriginal = inputNew.split(', ');
-
-    newList = inputLower.split(', ');
-    newListSorted = inputLower.split(', ').sort();
-  }
-  else if (inputNew.indexOf(',') > -1) {
-    newListOriginal = inputNew.split(',');
-
-    newList = inputLower.split(',');
-    newListSorted = inputLower.split(',').sort();
-  }
-  else {
-    newListSorted = newList;
-    newListOriginal = [inputNew];
+  for (let i = 0; i < newList.length; i++) {
+      newList[i].trim();
   }
 
   list = list.concat(newList);
 
-  sortedList = list.sort();
+  list.sort((a, b) => {
+      return a.toLowerCase().localeCompare(b.toLowerCase());
+  });
 
-  for (var i = 0; i < newList.length; i++) {
-    location = sortedList.indexOf(newListSorted[i]);
-
-    originalLocation = newList.indexOf(newListSorted[i]);
-
-    if (location == 0) {
-      $('#list').prepend('<li id="listItem">'+newListOriginal[originalLocation]+'</li>');
-      $('#list li:odd').css('background-color','#F5F5F5');
-      $('#list li:even').css('background-color','white');
-    }
-    else {
-      newLocation = location - 1;
-      $($('#list').find('li').get(newLocation)).after('<li id="listItem">'+newListOriginal[originalLocation]+'</li>');
-      $('#list li:odd').css('background-color','#F5F5F5');
-      $('#list li:even').css('background-color','white');
-    }
+  $list.html('');
+  for (let i = 0; i < list.length; i++) {
+      $list.append('<li>' + list[i] + '</li>');
   }
-  return;
 
+  $('#list li:odd').css('background-color','#F5F5F5');
+  $('#list li:even').css('background-color','white');
 }
 
 $(document).ready(function() {
@@ -82,18 +51,19 @@ $(document).ready(function() {
     }
   });
 
-
+  let $overlay = $('.overlay');
+  let $helpDiv = $('.helpDiv');
   $('.helpButton').click(function() {
-    $('.overlay').fadeIn('fast');
-    $('.helpDiv').fadeIn('fast');
+    $overlay.fadeIn('fast');
+    $helpDiv.fadeIn('fast');
   });
   $('.overlay').click(function() {
-    $('.overlay').fadeOut('fast');
-    $('.helpDiv').fadeOut('fast');
+    $overlay.fadeOut('fast');
+    $helpDiv.fadeOut('fast');
   });
   $('.close').click(function() {
-    $('.overlay').fadeOut('fast');
-    $('.helpDiv').fadeOut('fast');
+    $overlay.fadeOut('fast');
+    $helpDiv.fadeOut('fast');
   });
 
 
